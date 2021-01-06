@@ -9,19 +9,35 @@
   },
   "dependencies": {
     "expo": "~40.0.0",
+    "expo-constants": "~9.3.1",
     "expo-status-bar": "~1.0.3",
+    "moment": "2.29.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
-    "react-native-web": "~0.13.12",
-    "moment": "2.29.1",
     "react-is": "^16.8.0",
-    "expo-constants": "~9.3.1",
-    "styled-components": "5.2.1",
-    "react-native-paper": "3.6.0"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
+    "react-native-paper": "3.6.0",
+    "react-native-web": "~0.13.12",
+    "styled-components": "5.2.1"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0"
+    "@babel/core": "^7.9.6"
   },
-  "private": true
+  "private": true,
+  "name": "clock",
+  "description": "Open the `App.js` file to start writing some code. You can preview the changes directly on your phone or tablet by clicking the **Run** button or use the simulator by clicking **Tap to Play**. When you're done, click **Save** and share the link!",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ziguin2da/react-native-study-expo.git"
+  },
+  "keywords": [
+    "study"
+  ],
+  "author": "ziguin2da",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ziguin2da/react-native-study-expo/issues"
+  },
+  "homepage": "https://github.com/ziguin2da/react-native-study-expo#readme"
 }
