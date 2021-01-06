@@ -10,7 +10,7 @@ moment.locale('ko');
 // window, docuemnt 참조하는 라이브러리 등은 사용할 수 없음.
 
 const Label = styled.Text`
-  font-size: 36px;
+  font-size: 36px; 
   font-weight: bold;
 `;
 
