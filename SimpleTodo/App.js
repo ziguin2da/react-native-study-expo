@@ -4,6 +4,7 @@ import { StyleSheet, Platform } from 'react-native';
 import styled from 'styled-components';
 import Constants from 'expo-constants';
 import _ from 'lodash';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Container = styled.SafeAreaView`
   flex: 1; 
@@ -43,13 +44,36 @@ const TempText = styled.Text`
   margin-bottom: 12px;
 `;
 
-export default function App() {
-  const [ list, setList ] = React.useState([
-    { id: '1', todo: '할 일 1' },
-    { id: '2', todo: '할 일 2' },
-  ]);
+const Check = styled.TouchableOpacity`
+  margin-right: 4px;
+`;
+const CheckIcon = styled.Text`
+  font-size: 20px;
+`;
 
+export default function App() {
+  const [ list, setList ] = React.useState([]);
   const [ inputTodo, setInputTodo ] = React.useState('');
+
+
+  // ES6 - Promise : 비동기를 다루는 방식
+  // async (function) + await
+  React.useEffect( () => {
+    AsyncStorage.getItem( 'list' )
+      .then( data => {
+        if( data !== null ) {
+          setList( JSON.parse( data ) );
+        }
+      })
+      .catch( error => {
+        alert( error.message );
+      });
+}, [] );
+
+const store = ( newList ) => {
+  setList( newList );
+  AsyncStorage.setItem( 'list', JSON.stringify( newList ) );
+}
 
   // return 할 수 있는 객체
   // 1. 컴포넌트 2.컴포넌트로 이루어진 배열
@@ -62,11 +86,16 @@ export default function App() {
           { list.map( item => {
             return (
               <TodoItem key={ item.id }>
+                <Check>
+                  <CheckIcon>
+                    { item.done ? '☑️' : '☐' }
+                  </CheckIcon>
+                </Check>
                 <TodoItemText>
                   {item.todo}
                 </TodoItemText>
                 <TodoItemButton title='삭제' onPress={ () => {
-                  setList(_.reject( list, ele => ele.id === item.id ));
+                  store(_.reject( list, ele => ele.id === item.id ));
                 } } />
               </TodoItem>
             )
@@ -83,8 +112,9 @@ export default function App() {
             const newItem = {
               id: new Date().getTime().toString(),
               todo: inputTodo,
+              done: false,
             };
-            setList( [
+            store( [
               ...list, // ... 전개 연산자 Spread Operator
               newItem,
             ]);
