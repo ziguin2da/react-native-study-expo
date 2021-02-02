@@ -5,6 +5,7 @@ import axios from 'axios';
 import Title from '../components/Title';
 import ListItem from '../components/ListItem';
 import MovieName from '../components/MovieName';
+import fetch from '../net/fetch';
 
 const Container = styled.SafeAreaView`
     flex: 1;
@@ -23,14 +24,9 @@ const Rank = styled.Text`
 function BoxOffice(props) {
     const [list, setList] = React.useState([]);
     React.useEffect( () => {
-        axios.get('https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json', {
-            params: {
-                key: '05563785b5f3723eea79667393160119',
-                targetDt: '20210131'
-            }
-        }) 
-        .then( response => {
-            setList(response.data.boxOfficeResult.dailyBoxOfficeList);
+        fetch('https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=05563785b5f3723eea79667393160119&targetDt=20210201') 
+        .then( data => {
+            setList(data.boxOfficeResult.dailyBoxOfficeList);
         })
         .catch( error => {
             alert(error.message);

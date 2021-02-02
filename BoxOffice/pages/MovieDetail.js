@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import axios from 'axios';
 import { ActivityIndicator } from 'react-native';
 import moment from 'moment';
+import fetch from '../net/fetch';
 
 const Container = styled.SafeAreaView`
     flex: 1;
@@ -58,9 +59,9 @@ function MovieDetail(props) {
         url += '?key=05563785b5f3723eea79667393160119';
         url += '&movieCd=' + props.route.params.movieCd;
 
-        axios.get( url )
-            .then( response => {
-                setInfo(response.data.movieInfoResult.movieInfo);
+        fetch( url )
+            .then( data => {
+                setInfo(data.movieInfoResult.movieInfo);
             })
             .catch( error => {
                 alert(error.message);
