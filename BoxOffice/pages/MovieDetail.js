@@ -52,6 +52,10 @@ const HeaderTitle = styled.Text`
     font-weight: bold;
 `;
 
+const Temp = styled.Button`
+    flex-direction: row;
+`;
+
 function MovieDetail(props) {
     const [info, setInfo] = React.useState(null);
     React.useEffect( () => {
@@ -91,6 +95,11 @@ function MovieDetail(props) {
                         </>
                     )
                 }
+
+                <Temp title='재이동' onPress={() => {
+                    props.navigation.navigate('MovieDetail', { movieCd: props.route.params.movieCd });
+                }}
+                />
             </Contents>
         </Container>
     )
