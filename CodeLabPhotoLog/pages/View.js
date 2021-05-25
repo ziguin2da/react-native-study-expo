@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import storage from '../net/storage';
+import { withContext } from 'context-q';
+import moment from 'moment';
 
 const Title = styled.Text`
     font-size: 36px;
@@ -15,6 +17,12 @@ const Tags = styled.Text`
     font-size: 18px;
 `;
 
+const Date = styled.Text`
+    color: #aaaaaa;
+    font-size: 14px;
+    text-align: right;
+`;
+
 function View(props) {
     const [item, setItem] = React.useState(null);
     React.useEffect( () => {
@@ -26,11 +34,18 @@ function View(props) {
             { item && (
                 <>
                     <Image source={{uri: item.url}} />
+                    {
+                        props.context.showDate && (
+                            <Date>{moment(item.id, 'x').format('YYYY-MM-DD')}</Date>
+                        )
+                    }
                     <Tags>{item.hashtags}</Tags>
                 </>
             )}
         </>
     )
 }
+
+View = withContext( View );
 
 export default View;

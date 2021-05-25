@@ -4,6 +4,7 @@ import _ from 'lodash';
 const KEY = 'photo-logs';
 
 async function read( key ) {
+    
     const data = await AsyncStorage.getItem( key );
     let json = [];
     if( data !== null ) {
@@ -13,7 +14,7 @@ async function read( key ) {
 }
 
 async function store( key, value ) {
-    await AsyncStorage.setItem( key, value );
+    await AsyncStorage.setItem( key, JSON.stringify(value) );
 }
 
 async function readAll() {

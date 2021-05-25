@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import storage from '../net/storage';
+import { withContext } from 'context-q';
+import moment from 'moment';
 
 const Title = styled.Text`
     font-size: 36px;
@@ -9,9 +11,14 @@ const Button = styled.Button`
 `;
 const ListItem = styled.TouchableOpacity`
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     border-bottom-width: 1px;
     border-bottom-color: #e5e5e5;
+`;
+const Row = styled.View`
+    flex-direction: row;
+    align-items: center;
 `;
 const Thumbnail = styled.Image`
     width: 80px;
@@ -19,6 +26,10 @@ const Thumbnail = styled.Image`
     margin-right: 12px;
 `;
 const Tags = styled.Text`
+`;
+const Date = styled.Text`
+    color: #aaaaaa;
+    margin-right: 12px;
 `;
 
 function List(props) {
@@ -36,17 +47,29 @@ function List(props) {
                 <ListItem key={ item.id } onPress={ () => {
                     props.navigation.navigate( 'View', {id: item.id } );
                 }}>
-                    <Thumbnail source={{ uri: item.url }} />
-                    <Tags>
-                        {item.hashtags}
-                    </Tags>
+                    <Row>
+                        <Thumbnail source={{ uri: item.url }} />
+                        <Tags>
+                            {item.hashtags}
+                        </Tags>
+                    </Row>
+                    {
+                        props.context.showDate && (
+                            <Date>{moment(item.id, 'x').format('YYYY-MM-DD')}</Date>
+                        )
+                    }
                 </ListItem>
             ))}
             <Button title='사진 추가' onPress={ () => {
                 props.navigation.navigate( 'Form' );
             } }/>
+            <Button title='설정' onPress={ () => {
+                props.navigation.navigate( 'Settings' );
+            } }/>
         </>
     )
 }
+
+List = withContext( List );
 
 export default List;
