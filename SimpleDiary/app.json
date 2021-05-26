@@ -17,13 +17,17 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "io.bhchoi.simplediary",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "io.bhchoi.simplediary",
+      "versionCode": 10000
     },
     "web": {
       "favicon": "./assets/favicon.png"
